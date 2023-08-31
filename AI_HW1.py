@@ -27,7 +27,27 @@ def quickSort(array):
 
     else:
         return array
-      
+
+
+# hybridsort
+def hybridSort(L, BIG, SMALL, T):
+    # L = []
+    if len(L) >= T:
+        if isinstance(BIG, str):   
+            if BIG == "mergeSort":
+                mergeSort(L)
+            elif BIG == "quickSort":
+                quickSort(L)
+            else:
+                print("Error")
+            return       
+    else:
+        if isinstance(SMALL, str):
+            if SMALL == 'bubbleSort':
+                bubbleSort(L)
+            else:
+                print("Error")
+                return 
 
 
     
