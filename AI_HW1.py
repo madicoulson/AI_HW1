@@ -1,22 +1,29 @@
+### Group Members Names:
+### Madilyn Coulson, Isabella Hall, Chloe Belletti
+
+
 ### bubbleSort
 def bubbleSort(L):
     
     # Get the length, L, of the input list.
     length = len(L)
     
-    # Local boolean flag to check if any values have been swapped while sorting.
-    swapped = False
+    # Check that the list has a length greater than 1
+    if length > 1:
     
-    for i in range(length-1):
-        for k in range(0, length-i-1):
-            # If the current value is larger than the next value, swap them.
-            if L[k] > L[k+1]:
-                swapped = True
-                L[k], L[k+1] = L[k+1], L[k]
-        
-        # If nothing was swapped, just return the initial array, for it was already sorted.    
-        if not swapped:
-            return
+        # Local boolean flag to check if any values have been swapped while sorting
+        swapped = False
+
+        for i in range(length-1):
+            for k in range(0, length-i-1):
+                # If the current value is larger than the next value, swap them
+                if L[k] > L[k+1]:
+                    swapped = True
+                    L[k], L[k+1] = L[k+1], L[k]
+            
+            # If nothing was swapped, just return the initial array, for it was already sorted    
+            if not swapped:
+                return
 
 
 ### mergeSort
@@ -63,21 +70,21 @@ def mergeSort(L):
             k += 1
 
 
-#Quicksort
+### quickSort
 def quickSort(L):
 
-    # creating 3 arrays to separate numbers into
+    # Creating 3 lists to separate numbers into
     lowarr = []
     equalarr = []
     higharr = []
 
-    # ensure array is not empty and more than 1 number
+    # Ensure list is not empty and has more than 1 number
     if len(L) > 1:
 
-        # taking the first number in the array to check other numbers against 
+        # Taking the first number in the list to check other numbers against 
         checknum = L[0]
 
-        # sorting the array based on groupings of larger, smaller, or equal to the checknum value
+        # Sorting the list based on groupings of larger, smaller, or equal to the checknum value
         for x in L:
             if x < checknum:
                 lowarr.append(x)
@@ -86,6 +93,7 @@ def quickSort(L):
             if x > checknum:
                 higharr.append(x)
 
+        # Recursively calling the functionality again until sorted
         return quickSort(lowarr)+equalarr+quickSort(higharr)
 
     else:
@@ -115,28 +123,102 @@ def hybridSort(L, BIG, SMALL, T):
                 return 
    
             
-### Testing:
-# Driver code to test above
-arr = [64, 34, 25, 12, 22, 11, 90]
-arr2 = [64, 34, 25, 12, 22, 11, 90]
-arr3 = [64, 34, 25, 12, 22, 11, 90]
- 
-bubbleSort(arr)
-mergeSort(arr2)
-quickSort(arr3)
+### Testing Code:
 
+# Test 1 - list with 7 values
+test1_arr = [25, 98, 16, 2, 57, 23, 71]
+test1_arr2 = [25, 98, 16, 2, 57, 23, 71]
+test1_arr3 = [25, 98, 16, 2, 57, 23, 71]
+
+print("Test 1: Initial Array")
+for i in range(len(test1_arr)):
+    print("% d" % test1_arr[i], end=" ")
+print("\n")
  
-print("BUBBLE SORT Sorted array is:")
-for i in range(len(arr)):
-    print("% d" % arr[i], end=" ")
+bubbleSort(test1_arr)
+mergeSort(test1_arr2)
+quickSortList1 = quickSort(test1_arr3)
+
+print("Test 1: Bubble Sorted Array Output:")
+for i in range(len(test1_arr)):
+    print("% d" % test1_arr[i], end=" ")
+print("\n")
     
-print("MERGE SORT Sorted array is:")
-for i in range(len(arr2)):
-    print("% d" % arr2[i], end=" ")
+print("Test 1: Merge Sorted array is:")
+for i in range(len(test1_arr2)):
+    print("% d" % test1_arr2[i], end=" ")
+print("\n")
 
-print("QUICK SORT Sorted array is:")
-for i in range(len(arr3)):
-    print("% d" % arr3[i], end=" ")
+print("Test 1: Quick Sorted array is:")
+for i in range(len(quickSortList1)):
+    print("% d" % quickSortList1[i], end=" ")
+print("\n")
+
+
+# Test 2 - list with 3 values
+test2_arr = [61, 34, 12]
+test2_arr2 = [61, 34, 12]
+test2_arr3 = [61, 34, 12]
+
+print("Test 2: Initial Array")
+for i in range(len(test2_arr)):
+    print("% d" % test2_arr[i], end=" ")
+print("\n")
+ 
+bubbleSort(test2_arr)
+mergeSort(test2_arr2)
+quickSortList2 = quickSort(test2_arr3)
+
+print("Test 2: Bubble Sorted Array Output:")
+for i in range(len(test2_arr)):
+    print("% d" % test2_arr[i], end=" ")
+print("\n")
+    
+print("Test 2: Merge Sorted array is:")
+for i in range(len(test2_arr2)):
+    print("% d" % test2_arr2[i], end=" ")
+print("\n")
+
+print("Test 2: Quick Sorted array is:")
+for i in range(len(quickSortList2)):
+    print("% d" % quickSortList2[i], end=" ")
+print("\n")
+
+
+# Test 3 - list with 15 values
+test3_arr = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
+test3_arr2 = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
+test3_arr3 = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
+
+print("Test 3: Initial Array")
+for i in range(len(test3_arr)):
+    print("% d" % test3_arr[i], end=" ")
+print("\n")
+ 
+bubbleSort(test3_arr)
+mergeSort(test3_arr2)
+quickSortList3 = quickSort(test3_arr3)
+
+ 
+print("Test 3: Bubble Sorted Array Output:")
+for i in range(len(test3_arr)):
+    print("% d" % test3_arr[i], end=" ")
+print("\n")
+    
+print("Test 3: Merge Sorted array is:")
+for i in range(len(test3_arr2)):
+    print("% d" % test3_arr2[i], end=" ")
+print("\n")
+
+print("Test 3: Quick Sorted array is:")
+for i in range(len(quickSortList3)):
+    print("% d" % quickSortList3[i], end=" ")
+print("\n")
+
+
+
+
+
 
 # Part 2:
 # Quicksort as an agent- An agent with a divide and conquer architecture is the best option for quicksort because it is a pretty complex algorithm.
