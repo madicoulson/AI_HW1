@@ -146,35 +146,21 @@ def hybridSort(L, BIG, SMALL, T):
                     k += 1                
                 
             elif BIG == "quickSort":
-                #quickSort(L)
-                # Creating 3 lists to separate numbers into
-                lowarr = []
-                equalarr = []
-                higharr = []
-
-                # Ensure list is not empty and has more than 1 number
-                if len(L) > 1:
-
-                    # Taking the first number in the list to check other numbers against 
-                    checknum = L[0]
-
-                    # Sorting the list based on groupings of larger, smaller, or equal to the checknum value
-                    for x in L:
-                        if x < checknum:
-                            lowarr.append(x)
-                        if x == checknum:
-                            equalarr.append(x)
-                        if x > checknum:
-                            higharr.append(x)
-                    
-                    # Recursively call hybridSort on both sides of the list
-                    hybridSort(lowarr, "quickSort", "bubbleSort", T)   
-                    hybridSort(higharr, "quickSort", "bubbleSort", T)
-                    return lowarr + equalarr + higharr
-                        
+                def quickSorts(L):
+                    if len(L) <= 1:
+                        return L
+                
+                    pivot = L[len(L) // 2]  # Choose a pivot element
+                    left = [x for x in L if x < pivot]
+                    middle = [x for x in L if x == pivot]
+                    right = [x for x in L if x > pivot]
+                
+                    return quickSorts(left) + middle + quickSorts(right)
+            
+                L = quickSorts(L)  # Call quickSort function
             else:
                 print("Error")
-            return       
+            return L
     else:
         if isinstance(SMALL, str):
             if SMALL == 'bubbleSort':
