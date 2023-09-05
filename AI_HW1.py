@@ -100,17 +100,78 @@ def quickSort(L):
         return L
 
 
-# hybridsort
-# taking in the parameters
+### hybridSort
 def hybridSort(L, BIG, SMALL, T):
-    # L = []
-    # checking to see the length of the list to determine what algorithms to use
+
+    # Check to see the length of the list to determine which algorithms to use
     if len(L) >= T:
         if isinstance(BIG, str):   
             if BIG == "mergeSort":
-                mergeSort(L)
+                
+                # Find the midpoint of the list, and split the list into left and right sections
+                midpoint = len(L)//2
+                left = L[:midpoint]
+                right = L[midpoint:]
+                
+                # Recursively call hybridSort on both sides of the list
+                hybridSort(left, "mergeSort", "bubbleSort", T)
+                hybridSort(right, "mergeSort", "bubbleSort", T)
+                
+                # Set the three counter variables equal to 0
+                i = 0
+                j = 0
+                k = 0
+                
+                # Check if the right or left section values are larger, and copy the 
+                # smaller value to the initial list to sort
+                while i < len(left) and j < len(right):
+                    if left[i] <= right[j]:
+                        L[k] = left[i]
+                        i += 1
+                    else:
+                        L[k] = right[j]
+                        j += 1
+                    k += 1
+                
+                # Check if any elements are left over in either list, and if so,
+                # add them to the initial list
+                while i < len(left):
+                    L[k] = left[i]
+                    i += 1
+                    k += 1
+        
+                while j < len(right):
+                    L[k] = right[j]
+                    j += 1
+                    k += 1                
+                
             elif BIG == "quickSort":
-                quickSort(L)
+                #quickSort(L)
+                # Creating 3 lists to separate numbers into
+                lowarr = []
+                equalarr = []
+                higharr = []
+
+                # Ensure list is not empty and has more than 1 number
+                if len(L) > 1:
+
+                    # Taking the first number in the list to check other numbers against 
+                    checknum = L[0]
+
+                    # Sorting the list based on groupings of larger, smaller, or equal to the checknum value
+                    for x in L:
+                        if x < checknum:
+                            lowarr.append(x)
+                        if x == checknum:
+                            equalarr.append(x)
+                        if x > checknum:
+                            higharr.append(x)
+                    
+                    # Recursively call hybridSort on both sides of the list
+                    hybridSort(lowarr, "quickSort", "bubbleSort", T)   
+                    hybridSort(higharr, "quickSort", "bubbleSort", T)
+                    return lowarr + equalarr + higharr
+                        
             else:
                 print("Error")
             return       
@@ -129,6 +190,7 @@ def hybridSort(L, BIG, SMALL, T):
 test1_arr = [25, 98, 16, 2, 57, 23, 71]
 test1_arr2 = [25, 98, 16, 2, 57, 23, 71]
 test1_arr3 = [25, 98, 16, 2, 57, 23, 71]
+test1_arr4 = [25, 98, 16, 2, 57, 23, 71]
 
 print("Test 1: Initial Array")
 for i in range(len(test1_arr)):
@@ -138,20 +200,32 @@ print("\n")
 bubbleSort(test1_arr)
 mergeSort(test1_arr2)
 quickSortList1 = quickSort(test1_arr3)
+hybridSort(test1_arr3, "mergeSort", "bubbleSort", 5)
+hybridSortList1 = hybridSort(test1_arr4, "quickSort", "bubbleSort", 5)
 
-print("Test 1: Bubble Sorted Array Output:")
+print("Test 1: Bubble Sorted List Output:")
 for i in range(len(test1_arr)):
     print("% d" % test1_arr[i], end=" ")
 print("\n")
     
-print("Test 1: Merge Sorted array is:")
+print("Test 1: Merge Sorted List Output:")
 for i in range(len(test1_arr2)):
     print("% d" % test1_arr2[i], end=" ")
 print("\n")
 
-print("Test 1: Quick Sorted array is:")
+print("Test 1: Quick Sorted List Output:")
 for i in range(len(quickSortList1)):
     print("% d" % quickSortList1[i], end=" ")
+print("\n")
+
+print("Test 1: Hybrid Sorted List Output MergeSort:")
+for i in range(len(test1_arr3)):
+    print("% d" % test1_arr3[i], end=" ")
+print("\n")
+
+print("Test 1: Hybrid Sorted List Output QuickSort:")
+for i in range(len(hybridSortList1)):
+    print("% d" % hybridSortList1[i], end=" ")
 print("\n")
 
 
@@ -159,6 +233,8 @@ print("\n")
 test2_arr = [61, 34, 12]
 test2_arr2 = [61, 34, 12]
 test2_arr3 = [61, 34, 12]
+test2_arr4 = [61, 34, 12]
+
 
 print("Test 2: Initial Array")
 for i in range(len(test2_arr)):
@@ -168,6 +244,8 @@ print("\n")
 bubbleSort(test2_arr)
 mergeSort(test2_arr2)
 quickSortList2 = quickSort(test2_arr3)
+hybridSort(test2_arr3, "mergeSort", "bubbleSort", 2)
+hybridSortList2 = hybridSort(test2_arr4, "quickSort", "bubbleSort", 2)
 
 print("Test 2: Bubble Sorted Array Output:")
 for i in range(len(test2_arr)):
@@ -184,11 +262,22 @@ for i in range(len(quickSortList2)):
     print("% d" % quickSortList2[i], end=" ")
 print("\n")
 
+print("Test 2: Hybrid Sorted List Output MergeSort:")
+for i in range(len(test2_arr3)):
+    print("% d" % test2_arr3[i], end=" ")
+print("\n")
+
+print("Test 2: Hybrid Sorted List Output QuickSort:")
+for i in range(len(hybridSortList2)):
+    print("% d" % hybridSortList2[i], end=" ")
+print("\n")
+
 
 # Test 3 - list with 15 values
 test3_arr = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
 test3_arr2 = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
 test3_arr3 = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
+test3_arr4 = [71, 28, 90, 78, 5, 20, 16, 56, 89, 38, 14, 45, 26, 39, 76]
 
 print("Test 3: Initial Array")
 for i in range(len(test3_arr)):
@@ -198,6 +287,8 @@ print("\n")
 bubbleSort(test3_arr)
 mergeSort(test3_arr2)
 quickSortList3 = quickSort(test3_arr3)
+hybridSort(test3_arr3, "mergeSort", "bubbleSort", 8)
+hybridSortList3 = hybridSort(test3_arr4, "quickSort", "bubbleSort", 8)
 
  
 print("Test 3: Bubble Sorted Array Output:")
@@ -213,6 +304,16 @@ print("\n")
 print("Test 3: Quick Sorted array is:")
 for i in range(len(quickSortList3)):
     print("% d" % quickSortList3[i], end=" ")
+print("\n")
+
+print("Test 3: Hybrid Sorted List Output MergeSort:")
+for i in range(len(test3_arr3)):
+    print("% d" % test3_arr3[i], end=" ")
+print("\n")
+
+print("Test 3: Hybrid Sorted List Output QuickSort:")
+for i in range(len(hybridSortList3)):
+    print("% d" % hybridSortList3[i], end=" ")
 print("\n")
 
 
