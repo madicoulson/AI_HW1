@@ -74,114 +74,111 @@ def mergeSort(L):
 def quickSort(L):
 
     # Creating 3 lists to separate numbers into
-    lowarr = []
-    equalarr = []
-    higharr = []
+    lowList = []
+    equalList = []
+    highList = []
 
     # Ensure list is not empty and has more than 1 number
     if len(L) > 1:
 
         # Taking the first number in the list to check other numbers against 
-        checknum = L[0]
+        checkNum = L[0]
 
-        # Sorting the list based on groupings of larger, smaller, or equal to the checknum value
+        # Sorting the list based on groupings of larger, smaller, or equal to the checkNum value
         for x in L:
-            if x < checknum:
-                lowarr.append(x)
-            if x == checknum:
-                equalarr.append(x)
-            if x > checknum:
-                higharr.append(x)
+            if x < checkNum:
+                lowList.append(x)
+            if x == checkNum:
+                equalList.append(x)
+            if x > checkNum:
+                highList.append(x)
 
         # Recursively calling the functionality again until sorted
-        return quickSort(lowarr)+equalarr+quickSort(higharr)
+        return quickSort(lowList)+equalList+quickSort(highList)
 
     else:
         return L
-
+    
 
 ### hybridSort
 def hybridSort(L, BIG, SMALL, T):
 
     # Check to see the length of the list to determine which algorithms to use
-    if len(L) >= T:
-        if isinstance(BIG, str):   
-            if BIG == "mergeSort":
-                
-                # Find the midpoint of the list, and split the list into left and right sections
-                midpoint = len(L)//2
-                left = L[:midpoint]
-                right = L[midpoint:]
-                
-                # Recursively call hybridSort on both sides of the list
-                hybridSort(left, "mergeSort", "bubbleSort", T)
-                hybridSort(right, "mergeSort", "bubbleSort", T)
-                
-                # Set the three counter variables equal to 0
-                i = 0
-                j = 0
-                k = 0
-                
-                # Check if the right or left section values are larger, and copy the 
-                # smaller value to the initial list to sort
-                while i < len(left) and j < len(right):
-                    if left[i] <= right[j]:
-                        L[k] = left[i]
-                        i += 1
-                    else:
-                        L[k] = right[j]
-                        j += 1
-                    k += 1
-                
-                # Check if any elements are left over in either list, and if so,
-                # add them to the initial list
-                while i < len(left):
+    if len(L) >= T:   
+        if BIG == "mergeSort":
+            
+            # Find the midpoint of the list, and split the list into left and right sections
+            midpoint = len(L)//2
+            left = L[:midpoint]
+            right = L[midpoint:]
+            
+            # Recursively call hybridSort on both sides of the list
+            hybridSort(left, "mergeSort", "bubbleSort", T)
+            hybridSort(right, "mergeSort", "bubbleSort", T)
+            
+            # Set the three counter variables equal to 0
+            i = 0
+            j = 0
+            k = 0
+            
+            # Check if the right or left section values are larger, and copy the 
+            # smaller value to the initial list to sort
+            while i < len(left) and j < len(right):
+                if left[i] <= right[j]:
                     L[k] = left[i]
                     i += 1
-                    k += 1
-        
-                while j < len(right):
+                else:
                     L[k] = right[j]
                     j += 1
-                    k += 1                
-                
-            elif BIG == "quickSort":
-                #quickSort(L)
-                # Creating 3 lists to separate numbers into
-                lowarr = []
-                equalarr = []
-                higharr = []
+                k += 1
+            
+            # Check if any elements are left over in either list, and if so,
+            # add them to the initial list
+            while i < len(left):
+                L[k] = left[i]
+                i += 1
+                k += 1
+    
+            while j < len(right):
+                L[k] = right[j]
+                j += 1
+                k += 1                
+            
+        elif BIG == "quickSort":
+            # Creating 3 lists to separate numbers into
+            lowList = []
+            equalList = []
+            highList = []
 
-                # Ensure list is not empty and has more than 1 number
-                if len(L) > 1:
+            # Ensure list is not empty and has more than 1 number
+            if len(L) > 1:
 
-                    # Taking the first number in the list to check other numbers against 
-                    checknum = L[0]
+                # Taking the first number in the list to check other numbers against 
+                checkNum = L[0]
 
-                    # Sorting the list based on groupings of larger, smaller, or equal to the checknum value
-                    for x in L:
-                        if x < checknum:
-                            lowarr.append(x)
-                        if x == checknum:
-                            equalarr.append(x)
-                        if x > checknum:
-                            higharr.append(x)
+                # Sorting the list based on groupings of larger, smaller, or equal to the checkNum value
+                for x in L:
+                    if x < checkNum:
+                        lowList.append(x)
+                    if x == checkNum:
+                        equalList.append(x)
+                    if x > checkNum:
+                        highList.append(x)
                     
-                    # Recursively call hybridSort on both sides of the list
-                    hybridSort(lowarr, "quickSort", "bubbleSort", T)   
-                    hybridSort(higharr, "quickSort", "bubbleSort", T)
-                    return lowarr + equalarr + higharr
-                        
-            else:
-                print("Error")
-            return       
+                # Recursively call hybridSort on both sides of the list
+                hybridSort(lowList, "quickSort", "bubbleSort", T) 
+                hybridSort(highList, "quickSort", "bubbleSort", T)
+                L[:] = lowList + equalList + highList
+                    
+        else:
+            print("Error")
+        return       
     else:
-        if isinstance(SMALL, str):
-            if SMALL == 'bubbleSort':
-                bubbleSort(L)
-            else:
-                print("Error")
-                return 
+        if SMALL == 'bubbleSort':
+            bubbleSort(L)
+        else:
+            print("Error")
+            return 
    
             
 ### Testing Code:
@@ -201,7 +198,7 @@ bubbleSort(test1_arr)
 mergeSort(test1_arr2)
 quickSortList1 = quickSort(test1_arr3)
 hybridSort(test1_arr3, "mergeSort", "bubbleSort", 5)
-hybridSortList1 = hybridSort(test1_arr4, "quickSort", "bubbleSort", 5)
+hybridSort(test1_arr4, "quickSort", "bubbleSort", 5)
 
 print("Test 1: Bubble Sorted List Output:")
 for i in range(len(test1_arr)):
@@ -224,8 +221,8 @@ for i in range(len(test1_arr3)):
 print("\n")
 
 print("Test 1: Hybrid Sorted List Output QuickSort:")
-for i in range(len(hybridSortList1)):
-    print("% d" % hybridSortList1[i], end=" ")
+for i in range(len(test1_arr4)):
+    print("% d" % test1_arr4[i], end=" ")
 print("\n")
 
 
@@ -245,7 +242,7 @@ bubbleSort(test2_arr)
 mergeSort(test2_arr2)
 quickSortList2 = quickSort(test2_arr3)
 hybridSort(test2_arr3, "mergeSort", "bubbleSort", 2)
-hybridSortList2 = hybridSort(test2_arr4, "quickSort", "bubbleSort", 2)
+hybridSort(test2_arr4, "quickSort", "bubbleSort", 2)
 
 print("Test 2: Bubble Sorted Array Output:")
 for i in range(len(test2_arr)):
@@ -268,8 +265,8 @@ for i in range(len(test2_arr3)):
 print("\n")
 
 print("Test 2: Hybrid Sorted List Output QuickSort:")
-for i in range(len(hybridSortList2)):
-    print("% d" % hybridSortList2[i], end=" ")
+for i in range(len(test2_arr4)):
+    print("% d" % test2_arr4[i], end=" ")
 print("\n")
 
 
@@ -288,7 +285,7 @@ bubbleSort(test3_arr)
 mergeSort(test3_arr2)
 quickSortList3 = quickSort(test3_arr3)
 hybridSort(test3_arr3, "mergeSort", "bubbleSort", 8)
-hybridSortList3 = hybridSort(test3_arr4, "quickSort", "bubbleSort", 8)
+hybridSort(test3_arr4, "quickSort", "bubbleSort", 8)
 
  
 print("Test 3: Bubble Sorted Array Output:")
@@ -312,8 +309,8 @@ for i in range(len(test3_arr3)):
 print("\n")
 
 print("Test 3: Hybrid Sorted List Output QuickSort:")
-for i in range(len(hybridSortList3)):
-    print("% d" % hybridSortList3[i], end=" ")
+for i in range(len(test3_arr4)):
+    print("% d" % test3_arr4[i], end=" ")
 print("\n")
 
 
