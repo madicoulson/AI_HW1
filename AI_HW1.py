@@ -327,4 +327,10 @@ print("\n")
 # A- The actuators would be the actual sorting actions used to change the list. This can include a pivot point or dividing up the list into those smalelr groups.
 # S- The sensors would be the comparisons, swaps, and recursive calls needed to sort the list.
 
+
+# Bubblesort as an agent- It could be a reflex agent becasue it repeatedly compares and swaps elements until the entire list is sorted and its a simple alogorithm. 
+# P- Some performance meausres would include both efficency and accuracy, so measuring both the time and how accuarate the list was sorted. 
+# E- The environment would again be the input and output of the unsorted versus sorted list. 
+# A- Operation of just comparing each element and swapping them if needed 
+# S- The comparison results of whether or not it needs to be swapped 
     
