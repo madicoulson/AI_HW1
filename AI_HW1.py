@@ -183,6 +183,8 @@ def hybridSort(L, BIG, SMALL, T):
             print("Error")
             return
 
+
+### algorithmComparison - prints execution time of each algorithm
 def algorithmComparison(algorithm, randomList):
     
     if algorithm == mergeSort or algorithm == quickSort or algorithm == bubbleSort:
@@ -339,7 +341,7 @@ for i in range(len(test3_arr4)):
 print("\n")
 
 
-# Test 4 - random list for time complexities
+# Test 4 - random list for algorithm comparison
 randomList = [random.randint(1, 1000) for _ in range(1000)]
 algorithmComparison(bubbleSort, randomList)
 algorithmComparison(quickSort, randomList)
@@ -348,6 +350,7 @@ algorithmComparison(hybridSort, randomList)
 
 
 ### Part 2:
+
 # Quicksort as an agent- An agent with a divide and conquer architecture is the best option for quicksort because it is a pretty complex algorithm.
 # The agent would keep breaking up the list into smaller parts recursively and then sorts and combines them.
 # P- The best performance measure for quicksort would be the algorithms accuracy to sorting the list
@@ -372,7 +375,7 @@ algorithmComparison(hybridSort, randomList)
 
 
 # Discussion Comparing the Four Algorithms
-# Below is the date after running the algorithmComparison method above three times.
+# Below is the data after running the algorithmComparison method three times.
 
 # Trial 1:
 # <function bubbleSort at 0x000002E484A4DF80> Execution Time: 0.03461146354675293 seconds
