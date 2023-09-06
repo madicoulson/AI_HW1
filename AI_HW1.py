@@ -1,6 +1,9 @@
 ### Group Members Names:
 ### Madilyn Coulson, Isabella Hall, Chloe Belletti
 
+import time
+import random
+
 
 ### bubbleSort
 def bubbleSort(L):
@@ -178,9 +181,31 @@ def hybridSort(L, BIG, SMALL, T):
             bubbleSort(L)
         else:
             print("Error")
-            return 
-   
-            
+            return
+
+def algorithmComparison(algorithm, randomList):
+    
+    if algorithm == mergeSort or algorithm == quickSort or algorithm == bubbleSort:
+        start = time.time()
+        algorithm(randomList)
+        end = time.time()
+        totalTime = end - start
+        print(f'{algorithm} Total Time: {totalTime} seconds')
+        
+    elif algorithm == hybridSort:
+        start = time.time()
+        algorithm(randomList.copy(), "quickSort", "bubbleSort", len(randomList)//2)
+        end = time.time()
+        totalTime = end - start
+        print(f'{algorithm} with quickSort Total Time: {totalTime} seconds')
+        
+        start2 = time.time()
+        algorithm(randomList.copy(), "mergeSort", "bubbleSort", len(randomList)//2)
+        end2 = time.time()
+        totalTime2 = end2 - start2
+        print(f'{algorithm} with mergeSort Total Time: {totalTime2} seconds')
+        
+                    
 ### Testing Code:
 
 # Test 1 - list with 7 values
@@ -314,11 +339,15 @@ for i in range(len(test3_arr4)):
 print("\n")
 
 
+# Test 4 - random list for time complexities
+randomList = [random.randint(1, 1000) for _ in range(1000)]
+algorithmComparison(bubbleSort, randomList)
+algorithmComparison(quickSort, randomList)
+algorithmComparison(mergeSort, randomList)
+algorithmComparison(hybridSort, randomList)
 
 
-
-
-# Part 2:
+### Part 2:
 # Quicksort as an agent- An agent with a divide and conquer architecture is the best option for quicksort because it is a pretty complex algorithm.
 # The agent would keep breaking up the list into smaller parts recursively and then sorts and combines them.
 # P- The best performance measure for quicksort would be the algorithms accuracy to sorting the list
@@ -328,14 +357,50 @@ print("\n")
 # S- The sensors would be the comparisons, swaps, and recursive calls needed to sort the list.
 
 
-# Bubblesort as an agent- It could be a reflex agent becasue it repeatedly compares and swaps elements until the entire list is sorted and its a simple alogorithm. 
+# Bubblesort as an agent- It could be a reflex agent becasue it repeatedly compares and swaps elements until the entire list is sorted and its a simple algorithm. 
 # P- Some performance measures would include both efficency and accuracy, so measuring both the time and how accuarate the list was sorted. 
 # E- The environment would again be the input and output of the unsorted versus sorted list. 
 # A- Operation of just comparing each element and swapping them if needed 
 # S- The comparison results of whether or not it needs to be swapped 
+
 
 # Mergesort as an agent- An agent with a divide and conquer architecture is the best option for mergesort because it is a recursive algorithm
 # P- Performance measures for mergesort include complexity, run time, and accuracy
 # E- The environment would be the I/O of the algorithm
 # A- The actuators would be the operations taking place in the function that actually sort the list
 # S- The sensors would be the comparisons, recursive calls, and logic blocks needed to sort the list.
+
+
+# Discussion Comparing the Four Algorithms
+# Below is the date after running the algorithmComparison method above three times.
+
+# Trial 1:
+# <function bubbleSort at 0x000002E484A4DF80> Execution Time: 0.03461146354675293 seconds
+# <function quickSort at 0x000002E484A4E520> Execution Time: 0.018617868423461914 seconds
+# <function mergeSort at 0x000002E484A4E3E0> Execution Time: 0.0010008811950683594 seconds
+# <function hybridSort at 0x000002E484A9C360> with quickSort Execution Time: 0.014557600021362305 seconds
+# <function hybridSort at 0x000002E484A9C360> with mergeSort Execution Time: 0.000982046127319336 seconds
+
+# Trial 2:
+# <function bubbleSort at 0x0000017BFDC3DF80> Execution Time: 0.02999734878540039 seconds
+# <function quickSort at 0x0000017BFDC3E520> Execution Time: 0.017022371292114258 seconds
+# <function mergeSort at 0x0000017BFDC3E3E0> Execution Time: 0.0010013580322265625 seconds
+# <function hybridSort at 0x0000017BFDC8C360> with quickSort Execution Time: 0.013017416000366211 seconds
+# <function hybridSort at 0x0000017BFDC8C360> with mergeSort Execution Time: 0.0009834766387939453 seconds
+
+# Trial 3:
+# <function bubbleSort at 0x000002405CFEDF80> Execution Time: 0.033535003662109375 seconds
+# <function quickSort at 0x000002405CFEE520> Execution Time: 0.020998239517211914 seconds
+# <function mergeSort at 0x000002405CFEE3E0> Execution Time: 0.0010247230529785156 seconds
+# <function hybridSort at 0x000002405D03C360> with quickSort Execution Time: 0.01697373390197754 seconds
+# <function hybridSort at 0x000002405D03C360> with mergeSort Execution Time: 0.000997781753540039 seconds
+
+# According the the date above, the order of most to least efficient is as follows, with 1 being the most efficient:
+# 1. hybridSort calling mergeSort
+# 2. mergeSort
+# 3. hybridSort calling quickSort
+# 4. quickSort
+# 5. bubbleSort
+
+# This is logical due to the sorting operations in each of the methods.
+
