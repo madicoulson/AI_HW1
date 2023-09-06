@@ -329,8 +329,13 @@ print("\n")
 
 
 # Bubblesort as an agent- It could be a reflex agent becasue it repeatedly compares and swaps elements until the entire list is sorted and its a simple alogorithm. 
-# P- Some performance meausres would include both efficency and accuracy, so measuring both the time and how accuarate the list was sorted. 
+# P- Some performance measures would include both efficency and accuracy, so measuring both the time and how accuarate the list was sorted. 
 # E- The environment would again be the input and output of the unsorted versus sorted list. 
 # A- Operation of just comparing each element and swapping them if needed 
 # S- The comparison results of whether or not it needs to be swapped 
-    
+
+# Mergesort as an agent- An agent with a divide and conquer architecture is the best option for mergesort because it is a recursive algorithm
+# P- Performance measures for mergesort include complexity, run time, and accuracy
+# E- The environment would be the I/O of the algorithm
+# A- The actuators would be the operations taking place in the function that actually sort the list
+# S- The sensors would be the comparisons, recursive calls, and logic blocks needed to sort the list.
