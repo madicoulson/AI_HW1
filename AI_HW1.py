@@ -190,20 +190,20 @@ def algorithmComparison(algorithm, randomList):
         algorithm(randomList)
         end = time.time()
         totalTime = end - start
-        print(f'{algorithm} Execution Time: {totalTime} seconds')
+        print(f'{algorithm} Total Time: {totalTime} seconds')
         
     elif algorithm == hybridSort:
         start = time.time()
         algorithm(randomList.copy(), "quickSort", "bubbleSort", len(randomList)//2)
         end = time.time()
         totalTime = end - start
-        print(f'{algorithm} with quickSort Execution Time: {totalTime} seconds')
+        print(f'{algorithm} with quickSort Total Time: {totalTime} seconds')
         
         start2 = time.time()
         algorithm(randomList.copy(), "mergeSort", "bubbleSort", len(randomList)//2)
         end2 = time.time()
         totalTime2 = end2 - start2
-        print(f'{algorithm} with mergeSort Execution Time: {totalTime2} seconds')
+        print(f'{algorithm} with mergeSort Total Time: {totalTime2} seconds')
         
                     
 ### Testing Code:
